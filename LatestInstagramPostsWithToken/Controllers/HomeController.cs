@@ -1,21 +1,23 @@
 ﻿using LatestInstagramPostsWithToken.Models;
+using LatestInstagramPostsWithToken.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace LatestInstagramPostsWithToken.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly InstagramService _instagramService;
+        public HomeController(InstagramService instagramService)
         {
-            _logger = logger;
+            _instagramService = instagramService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var media = await _instagramService.FetchRecentMediaAsync();
+            return View(media);
         }
 
         public IActionResult Privacy()

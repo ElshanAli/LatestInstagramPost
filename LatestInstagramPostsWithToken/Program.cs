@@ -1,3 +1,5 @@
+using LatestInstagramPostsWithToken.Services;
+
 namespace LatestInstagramPostsWithToken
 {
     public class Program
@@ -8,7 +10,7 @@ namespace LatestInstagramPostsWithToken
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddTransient<InstagramService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
